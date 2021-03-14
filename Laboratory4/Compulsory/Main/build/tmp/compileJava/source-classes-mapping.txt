@@ -1,0 +1,10 @@
+lab4Comp/Student.java
+ lab4Comp.Student
+lab4Comp/School.java
+ lab4Comp.School
+lab4Comp/Problem.java
+ lab4Comp.Problem
+lab4Comp/Solution.java
+ lab4Comp.Solution
+lab4Comp/Main.java
+ lab4Comp.Main

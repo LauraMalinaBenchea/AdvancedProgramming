@@ -4,36 +4,62 @@ import java.util.*;
 import java.time.Duration;
 
 public class Main {
-    public static void compulsory(){
+
+    public static void optional(){
         List<Location> elements  = new ArrayList<>();
         Hotel v1 = new Hotel();
-        v1.setName("Hotel");
-        elements.add(v1);
         Museum v2 = new Museum();
-        v2.setOpeningHour(LocalTime.parse("12:00"));
-        v2.setName("Museum A");
-        elements.add(v2);
         Museum v3 = new Museum();
-        v3.setName("Museum B");
-        elements.add(v3);
         Church v4 = new Church();
-        v4.setName("Church C");
-        v4.setOpeningHour(LocalTime.parse("09:00"));
-        v4.setClosingHour(LocalTime.parse("13:00"));
-        System.out.println(Visitable.getVisitingDuration(v4.getOpeningHour(), v4.getClosingHour()));
-        elements.add(v4);
         Church v5  = new Church();
-        v5.setOpeningHour(LocalTime.parse("12:00"));
-        v5.setClosingHour(LocalTime.parse("13:00"));
-        v5.setName("Church B");
-        elements.add(v5);
         Restaurant v6 = new Restaurant();
-        v6.setName("Restaurant");
+        //adding all the locations in the previously declared list
+        elements.add(v1);
+        elements.add(v2);
+        elements.add(v3);
+        elements.add(v4);
+        elements.add(v5);
         elements.add(v6);
-        City cityList = new City(elements);
-        cityList.displayVisitableButNotPayabple();
+        //setting the names
+        v1.setName("Hotel");
+        v2.setName("Museum A");
+        v3.setName("Museum B");
+        v4.setName("Church C");
+        v5.setName("Church B");
+        v6.setName("Restaurant");
+        //opening/closing hours
+        v2.setOpeningHour(LocalTime.parse("12:00"));
+        v2.setClosingHour(LocalTime.parse("18:00"));
+        v4.setOpeningHour(LocalTime.parse("09:00"));
+        v4.setClosingHour(LocalTime.parse("19:00"));
+        v5.setOpeningHour(LocalTime.parse("08:00"));
+        v5.setClosingHour(LocalTime.parse("13:00"));
+
+        v1.setCost(v2, 10);
+        v1.setCost(v3, 50);
+        v2.setCost(v3, 20);
+        v2.setCost(v4, 20);
+        v2.setCost(v5, 10);
+        v3.setCost(v2, 20);
+        v3.setCost(v4, 20);
+        v4.setCost(v5, 30);
+        v4.setCost(v6, 10);
+        v5.setCost(v4, 30);
+        v5.setCost(v6, 20);
+        for(int iterator = 0; iterator < elements.size(); iterator++) {
+            System.out.println("From " + (elements.get(iterator)).getName() + " to");
+            System.out.println((elements.get(iterator)).getCost());
+        }
+
+        City Chicago = new City(elements);
+        Chicago.displayVisitableButNotPayabple();
+        System.out.println(Chicago.getNodes());
+
+        TravelPlan wantToGo = new TravelPlan(Chicago, v1, v2, v3);
+        System.out.println(wantToGo.getToVisit());
+
     }
     public static void main(String arggs[]) {
-        compulsory();
+        optional();
     }
 }
